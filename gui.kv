@@ -1,0 +1,113 @@
+# Project:      Lab7
+# Author:       Nicole Ruiz-Bueno
+# Date:         02/27/2023
+# File:         gui.kv
+# Description:  Use Python string functions to check if a user entered password meets the following requirements:
+#               Must be at least 8 characters long.
+#               Must contain at least one lowercase letter
+#               Must contain at least one uppercase letter
+#               Must contain at least one digit.
+#
+#               If the password meets the above criteria display a message box with the message
+#               “Meets all requirements”.
+#               If the password does not meet the requirements, display a message box stating why.
+#               For example:
+#               Must be at least 8 characters
+#               Must have at least 1 uppercase letter
+#               Must have at least 1 lowercase letter
+#               Must have at least 1 digit
+
+# Input:        User enters in password of choice
+# Output:       The password is either accepted or rejected based on the password requirements
+
+# Processing:   Declare a variable to hold the password
+#                Check password length (must be at least 8 characters)
+#                    If not at least 8 characters, display error message ('Must be at least 8 characters')
+#               Run for loop to make sure there is at least 1 lowercase character
+#                        count = 0
+#                            for character in password:
+#                            if character.islower():
+#                               count = count + 1
+#                        If there are no lowercase characters, display error message ('Must have at least 1 lowercase
+#                            letter')
+#                                    else:
+#                                     if count < 1:
+#                                        self.kivy_message_box('Password Check', 'Must have at least 1 lowercase letter')
+#                                         return
+#                Run a similar for loop but check for uppercase characters (change lower to upper in code)
+#                    If there are no uppercase characters, display error message ('Must have at least 1 uppercase
+#                            letter')
+#                Run a for loop to check for special character:
+#                   (assign variable) special = '!@#$%^&*'
+#                       for special_char in special:
+#                           if special_char in password:
+#                               count = count + 1
+#                    If there are no special character, display error message ('Must have at least 1 special character')
+#
+#                Exit button releases event function that closes application.
+
+# Density-independent Pixels - An abstract unit based on the physical density of the screen.
+# With a density of 1, 1dp is equal to 1px. When running on a higher density screen, the number of
+# pixels used to draw 1dp is scaled up a factor appropriate to the screen’s dpi, and the inverse
+# for a lower dpi.
+# Scale-independent Pixels - This is like the dp unit,
+# but it is also scaled by the user’s font size preference. See examples below:
+# font_size: '16dp'
+# font_size: sp(16)
+# font_size: dp(16)
+# height: dp(50)
+
+<MyLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+
+        Label:
+            font_size: dp(16)
+            size_hint: (1, .2)
+            line0: 'Good Passwords must meet the following requirements: \n\n'
+            line1: '1. Must be at least 8 characters long \n'
+            line2: '2. Must contain at least one lowercase letter \n'
+            line3: '3. Must contain at least one uppercase letter \n'
+            line4: '4. Must contain at least one digit \n'
+            line5: '5. Must contain at least one special character (! @ # $ % ^ & *) \n'
+
+            text: self.line0 + self.line1 + self.line2 + self.line3 + self.line4 + self.line5
+
+        GridLayout:
+            cols: 2
+            padding: dp(10)
+            spacing: dp(10)
+            size_hint: (1, .20)
+
+            Label:
+                text: 'Password'
+                font_size: dp(16)
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(50)
+
+            TextInput:
+                id: password
+                text: ''
+                font_size: dp(16)
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(50)
+
+            Button:
+                text: 'Check Password'
+                font_size: dp(16)
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(50)
+                #width: dp(200)
+                on_release: app.check_button()
+
+            Button:
+                text: 'Exit'
+                font_size: dp(16)
+                size_hint_x: 1
+                size_hint_y: None
+                height: dp(50)
+                on_release: app.exit_button()
